@@ -1,0 +1,12 @@
+.info-box-huge-number {
+    font-size: 2.5em;
+    font-weight: 800;
+}
+
+.small-box h4 {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  padding: 0;
+}

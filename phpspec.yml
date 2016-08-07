@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Republicas
+        psr4_prefix: Republicas
+        src_path: app
