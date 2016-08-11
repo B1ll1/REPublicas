@@ -3,11 +3,21 @@
 namespace Republicas\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Republicas\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use Republicas\Contracts\Repositories\RoomRepository;
+use Republicas\Contracts\Repositories\RepublicRepository;
 
 class RepublicController extends Controller
 {
+    protected $repository;
+    protected $roomRepository;
+
+    public function __construct(RepublicRepository $republicRepository, RoomRepository $roomRepository)
+    {
+        $this->repository = $republicRepository;
+        $this->roomRepository = $roomRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +25,23 @@ class RepublicController extends Controller
      */
     public function index()
     {
-        //
+        if(is_null(Auth::user()->republic) && Auth::user()->republics->isEmpty())
+            return redirect()->route('republic.create');
+        else {
+            if(!is_null(Auth::user()->republic))
+                $republic = Auth::user()->republic;
+            else
+                $republic = Auth::user()->republics->first();
+
+            return redirect()->route('republic.dashboard', $republic->id);
+        }
     }
 
-    public function dashboard()
+    public function dashboard($republicId)
     {
-        return view('republics.dashboard');
+        $republic = $this->repository->find($republicId);
+
+        return view('republics.dashboard', compact('republic'));
     }
 
     /**
@@ -30,7 +51,7 @@ class RepublicController extends Controller
      */
     public function create()
     {
-        //
+        return view('republics.create');
     }
 
     /**
@@ -41,7 +62,33 @@ class RepublicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \DB::beginTransaction();
+        $inputs = $request->all();
+        $inputs['user_id'] = Auth::user()->id;
+
+        $republic = $this->repository->create($inputs);
+
+        if($republic) {
+            $totalRooms = intval($inputs['simple_rooms']) + intval($inputs['suite_rooms']);
+
+            for ($i=1; $i <= $totalRooms; $i++) {
+                $this->roomRepository->create([
+                    'republic_id' => $republic->id,
+                    'num_beds' => 1,
+                    'type' => 'normal',
+                    'price' => 0.00
+                ]);
+            }
+            \DB::commit();
+
+            return redirect()->route('republic.dashboard', $republic->id);
+        }
+        else {
+            \DB::rollback();
+
+            return redirect()->route('republic.create');
+
+        }
     }
 
     /**
