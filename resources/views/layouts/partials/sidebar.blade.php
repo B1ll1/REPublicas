@@ -16,7 +16,7 @@
       <ul class="sidebar-menu">
         {{-- <li class="header">MAIN NAVIGATION</li> --}}
 
-        <li class="active treeview">
+        <li class="{{ strpos(Request::url(), 'dashboard') ? 'active' : '' }} treeview">
           <a href="#">
             <i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span>
           </a>
@@ -36,9 +36,9 @@
           </ul>
         </li>
 
-        <li>
-          <a href="#">
-            <i class="fa fa-bed fa-fw"></i> <span>Quartos</span>
+        <li class="{{ strpos(Request::url(), 'quartos') ? 'active' : '' }}">
+          <a href="{{ route('room.index', $republic->id) }}">
+            <i class="glyphicon glyphicon-bed"></i> <span>Quartos</span>
           </a>
         </li>
 

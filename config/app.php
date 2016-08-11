@@ -145,7 +145,7 @@ return [
         Republicas\Providers\EventServiceProvider::class,
         Republicas\Providers\RouteServiceProvider::class,
 
-	Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
