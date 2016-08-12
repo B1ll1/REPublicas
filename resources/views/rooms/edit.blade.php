@@ -61,8 +61,6 @@
             </div>
           </div>
         {!! Form::close() !!}
-    </section>
-    <!-- /.section -->
 @stop
 
 @section('inline_scripts')
