@@ -42,8 +42,8 @@ return [
     ],
 
     'google' => [
-        'client_id' => '551812017136-pt377fpb5nqh06hjhvcfvh46k0bhamen.apps.googleusercontent.com',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://dev.republicas2.com/social/login/google/callback',
+        'redirect' => env('GOOGLE_REDIRECT'),
     ],
 ];
