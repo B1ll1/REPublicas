@@ -6,7 +6,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Republicas\Contracts\Repositories\RepublicRepository;
 use Republicas\Models\Republic;
-use Republicas\Validators\RepublicValidator;
 
 /**
  * Class RepublicRepositoryEloquent
