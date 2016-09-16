@@ -10,3 +10,7 @@
   white-space: nowrap;
   padding: 0;
 }
+
+.room a {
+    color: #000;
+}

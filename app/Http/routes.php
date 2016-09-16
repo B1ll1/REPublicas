@@ -14,9 +14,21 @@
 Route::get('/', function() {
     return view('welcome');
 });
+
 Route::group(['middleware' => 'auth' ], function () {
-    Route::get('/dashboard', ['as' => 'republic_dashboard', 'uses' => 'RepublicController@dashboard']);
-    // Route::get('/', 'HomeController@index');
+
+    Route::group(['prefix' => 'republica', 'as' => 'republic.'], function () {
+        Route::get('/', ['as' => 'index', 'uses' => 'RepublicController@index']);
+        Route::get('/nova', ['as' => 'create', 'uses' => 'RepublicController@create']);
+        Route::post('/salvar', ['as' => 'store', 'uses' => 'RepublicController@store']);
+    });
+    Route::get('/{republicId}/dashboard', ['as' => 'republic.dashboard', 'uses' => 'RepublicController@dashboard']);
+    Route::group(['prefix' => '{republicId}/quartos', 'as' => 'room.'], function () {
+        Route::get('', ['as' => 'index', 'uses' => 'RoomController@index']);
+        Route::get('/salvar', ['as' => 'store', 'uses' => 'RoomController@store']);
+        Route::get('/{roomId}/editar', ['as' => 'edit', 'uses' => 'RoomController@edit']);
+        Route::put('/{roomId}/alterar', ['as' => 'update', 'uses' => 'RoomController@update']);
+    });
 });
 
 Route::get('social/login/{provider}', ['as' => 'social_login', 'uses' => 'Auth\AuthController@redirectToProvider']);
