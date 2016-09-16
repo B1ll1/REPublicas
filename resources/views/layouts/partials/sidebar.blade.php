@@ -17,7 +17,7 @@
         {{-- <li class="header">MAIN NAVIGATION</li> --}}
 
         <li class="{{ strpos(Request::url(), 'dashboard') ? 'active' : '' }} treeview">
-          <a href="#">
+          <a href="{{ route('republic.dashboard', $republic->id) }}">
             <i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -31,7 +31,7 @@
           </a>
 
           <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-money"></i> Tipos de Gastos</a></li>
+            <li class="active"><a href="{{ route('bill.type.index', $republic->id) }}"><i class="fa fa-money"></i> Tipos de Gastos</a></li>
             <li><a href="#"><i class="fa fa-eye"></i> Ver Todos</a></li>
           </ul>
         </li>

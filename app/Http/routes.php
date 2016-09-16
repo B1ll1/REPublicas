@@ -23,11 +23,21 @@ Route::group(['middleware' => 'auth' ], function () {
         Route::post('/salvar', ['as' => 'store', 'uses' => 'RepublicController@store']);
     });
     Route::get('/{republicId}/dashboard', ['as' => 'republic.dashboard', 'uses' => 'RepublicController@dashboard']);
+
     Route::group(['prefix' => '{republicId}/quartos', 'as' => 'room.'], function () {
         Route::get('', ['as' => 'index', 'uses' => 'RoomController@index']);
         Route::get('/salvar', ['as' => 'store', 'uses' => 'RoomController@store']);
         Route::get('/{roomId}/editar', ['as' => 'edit', 'uses' => 'RoomController@edit']);
         Route::put('/{roomId}/alterar', ['as' => 'update', 'uses' => 'RoomController@update']);
+    });
+
+    Route::group(['prefix' => '{republicId}/contas', 'as' => 'bill.'], function () {
+        Route::group(['prefix' => 'tipos', 'as' => 'type.' ], function () {
+            Route::get('', ['as' => 'index', 'uses' => 'BillTypeController@index']);
+            Route::get('/criar', ['as' => 'create', 'uses' => 'BillTypeController@create']);
+            Route::post('/salvar', ['as' => 'store', 'uses' => 'BillTypeController@store']);
+            Route::delete('/{typeId}/deletar', ['as' => 'delete', 'uses' => 'BillTypeController@destroy']);
+        });
     });
 });
 

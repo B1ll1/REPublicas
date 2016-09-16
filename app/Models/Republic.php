@@ -41,6 +41,11 @@ class Republic extends Model implements Transformable
         return $this->hasMany(Room::class);
     }
 
+    public function billtypes()
+    {
+        return $this->hasMany(BillType::class);
+    }
+
     /*
      * METHODS
      */
