@@ -12,10 +12,9 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract,
-                                    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword, EntrustUserTrait;
 
     /**
      * The database table used by the model.
@@ -65,7 +64,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function room()
     {
-        return $this->belongsToOne( Room::class );
+        return $this->belongsToOne(Room::class);
     }
     /**
      * Sets the default photo.

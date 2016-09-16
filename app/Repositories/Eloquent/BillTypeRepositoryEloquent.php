@@ -33,4 +33,9 @@ class BillTypeRepositoryEloquent extends BaseRepository implements BillTypeRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function getGeneralTypes()
+    {
+        return $this->model->whereIn('id', [1, 2, 3, 4, 5]);
+    }
 }

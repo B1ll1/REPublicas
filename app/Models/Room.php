@@ -10,6 +10,21 @@ class Room extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'republic_id',
+        'num_beds',
+        'type',
+        'price',
+    ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function republic()
+    {
+        return $this->belongsTo(Republic::class);
+    }
 
 }
