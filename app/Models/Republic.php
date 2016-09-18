@@ -12,7 +12,6 @@ class Republic extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = [
-        'user_id',
         'name',
         'telephone',
         'simple_rooms',
@@ -27,13 +26,9 @@ class Republic extends Model implements Transformable
     /*
      * RELATIONS
      */
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
     public function users()
     {
-        return $this->belongsToMany(User::class, 'republic_users');
+        return $this->hasMany(User::class);
     }
 
     public function rooms()
@@ -44,6 +39,11 @@ class Republic extends Model implements Transformable
     public function billtypes()
     {
         return $this->hasMany(BillType::class);
+    }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
     }
 
     /*
@@ -57,7 +57,7 @@ class Republic extends Model implements Transformable
     public function getNumberOfMembers()
     {
         if($this->users->isEmpty())
-            return 0;
+            return 1;
         else
             return count($this->users);
     }
@@ -76,6 +76,10 @@ class Republic extends Model implements Transformable
     public function getMonthlyCosts()
     {
         $total = 0.00;
+
+        foreach ($this->bills as $key => $bill) {
+            $total += $bill->value;
+        }
 
         $total += $this->getRentValue();
 

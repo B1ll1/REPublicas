@@ -34,7 +34,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'telephone',
         'password',
         'photo',
-        'room_id'
+        'room_id',
+        'republic_id',
     ];
 
     /**
@@ -49,12 +50,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function republic()
     {
-        return $this->hasOne(Republic::class);
-    }
-
-    public function republics()
-    {
-        return $this->belongsToMany(Republic::class, 'republic_users');
+        return $this->belongsTo(Republic::class);
     }
 
     public function notices()
@@ -64,7 +60,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function room()
     {
-        return $this->belongsToOne(Room::class);
+        return $this->belongsTo(Room::class);
     }
     /**
      * Sets the default photo.

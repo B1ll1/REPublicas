@@ -65,10 +65,10 @@ class AuthController extends Controller
 
         $aux = User::firstOrCreate($data);
 
-        if($aux->photo == "") {
-            $aux->setDefaultPhoto();
-            $aux->save();
-        }
+        // if($aux->photo == "") {
+        //     $aux->setDefaultPhoto();
+        //     $aux->save();
+        // }
 
         Auth::login($aux);
 

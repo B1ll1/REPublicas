@@ -12,18 +12,18 @@ class CreateRepublicUsersTable extends Migration
         */
        public function up()
        {
-           Schema::create('republic_users', function (Blueprint $table) {
-               $table->integer('user_id')->unsigned()->index();
-               $table->foreign('user_id')->references('id')
-                   ->on('users')->onUpdate('cascade')->onDelete('cascade');
+           // Schema::create('republic_users', function (Blueprint $table) {
+           //     $table->integer('user_id')->unsigned()->index();
+           //     $table->foreign('user_id')->references('id')
+           //         ->on('users')->onUpdate('cascade')->onDelete('cascade');
 
-               $table->integer('republic_id')->unsigned()->index();
-               $table->foreign('republic_id')->references('id')
-                   ->on('republics')->onUpdate('cascade')->onDelete('cascade');
+           //     $table->integer('republic_id')->unsigned()->index();
+           //     $table->foreign('republic_id')->references('id')
+           //         ->on('republics')->onUpdate('cascade')->onDelete('cascade');
 
-               $table->primary(['user_id', 'republic_id']);
-               $table->timestamps();
-           });
+           //     $table->primary(['user_id', 'republic_id']);
+           //     $table->timestamps();
+           // });
        }
 
        /**
@@ -33,6 +33,6 @@ class CreateRepublicUsersTable extends Migration
         */
        public function down()
        {
-           Schema::drop('republic_users');
+           // Schema::drop('republic_users');
        }
 }

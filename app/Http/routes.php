@@ -24,14 +24,30 @@ Route::group(['middleware' => 'auth' ], function () {
     });
     Route::get('/{republicId}/dashboard', ['as' => 'republic.dashboard', 'uses' => 'RepublicController@dashboard']);
 
+    /**
+     * Rooms routes
+     */
     Route::group(['prefix' => '{republicId}/quartos', 'as' => 'room.'], function () {
-        Route::get('', ['as' => 'index', 'uses' => 'RoomController@index']);
-        Route::get('/salvar', ['as' => 'store', 'uses' => 'RoomController@store']);
-        Route::get('/{roomId}/editar', ['as' => 'edit', 'uses' => 'RoomController@edit']);
-        Route::put('/{roomId}/alterar', ['as' => 'update', 'uses' => 'RoomController@update']);
+        Route::get('', ['as' => 'index', 'uses' => 'RoomsController@index']);
+        Route::get('/salvar', ['as' => 'store', 'uses' => 'RoomsController@store']);
+        Route::get('/{roomId}/editar', ['as' => 'edit', 'uses' => 'RoomsController@edit']);
+        Route::put('/{roomId}/alterar', ['as' => 'update', 'uses' => 'RoomsController@update']);
     });
 
+    /**
+     * Bills routes
+     */
     Route::group(['prefix' => '{republicId}/contas', 'as' => 'bill.'], function () {
+        Route::get('', ['as' => 'index', 'uses' => 'BillsController@index']);
+        Route::get('/nova', ['as' => 'create', 'uses' => 'BillsController@create']);
+        Route::post('/salvar', ['as' => 'store', 'uses' => 'BillsController@store']);
+        Route::get('/{billId}/editar', ['as' => 'edit', 'uses' => 'BillsController@edit']);
+        Route::put('/{billId}/salvar', ['as' => 'update', 'uses' => 'BillsController@update']);
+        Route::delete('/{billId}/deletar', ['as' => 'delete', 'uses' => 'BillsController@destroy']);
+
+        /**
+         * Bill type routes
+         */
         Route::group(['prefix' => 'tipos', 'as' => 'type.' ], function () {
             Route::get('', ['as' => 'index', 'uses' => 'BillTypeController@index']);
             Route::get('/criar', ['as' => 'create', 'uses' => 'BillTypeController@create']);
@@ -41,6 +57,7 @@ Route::group(['middleware' => 'auth' ], function () {
     });
 });
 
+// Login routes
 Route::get('social/login/{provider}', ['as' => 'social_login', 'uses' => 'Auth\AuthController@redirectToProvider']);
 Route::get('social/login/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
@@ -48,11 +65,11 @@ Route::get('auth/login', ['as' => 'login-form', 'uses' => 'Auth\AuthController@g
 Route::post('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 
-// Registration routes...
+// Registration routes
 Route::get('auth/register', ['as' => 'register-form', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@postRegister']);
 
-//============================= Images Route =================================
+// Images route
 Route::get('/images/{folder}/{image?}/{size?}', ['as' => 'images', 'uses' => function($folder, $image, $size) {
     $path = storage_path() . '/app/' . $folder . '/' . $image;
     $img = Image::make($path)->resize(null, $size, function ($constraint) {
@@ -61,4 +78,3 @@ Route::get('/images/{folder}/{image?}/{size?}', ['as' => 'images', 'uses' => fun
 
     return $img->response();
 }]);
-//=======================================================================

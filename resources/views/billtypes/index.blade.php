@@ -4,7 +4,7 @@
 <!-- Main content -->
     <section class="content">
 
-     @include('layouts.partials.statistcs')
+     {{-- @include('layouts.partials.statistcs') --}}
 
       <section class="content-header">
       <h1>

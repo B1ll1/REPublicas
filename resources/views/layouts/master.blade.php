@@ -32,8 +32,8 @@
 
   <!-- Select2 -->
   {{-- <link rel="stylesheet" href="/adminlte/plugins/select2/select2.min.css"> --}}
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/libs/select2/dist/css/select2.min.css" />
+  <link rel="stylesheet" href="/assets/libs/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/assets/css/custom.css">
 
@@ -110,9 +110,7 @@
 <!-- FastClick -->
 <script src="/adminlte/plugins/fastclick/fastclick.js"></script>
 <!-- Select2 -->
-{{-- <script src="/adminlte/plugins/select2/select2.full.min.js"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"></script>
+<script src="/assets/libs/select2/dist/js/select2.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/app.min.js"></script>

@@ -46,7 +46,7 @@
       <div class="icon">
         <i class="fa fa-calculator fa-fw"></i>
       </div>
-      <a href="#" class="small-box-footer">
+      <a href="{{ route('bill.index', $republic->id) }}" class="small-box-footer">
         Detalhes <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>

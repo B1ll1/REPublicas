@@ -26,6 +26,11 @@ class BillType extends Model implements Transformable
         return $this->hasMany(Bill::class);
     }
 
+    public function republic()
+    {
+        return $this->belongsTo(Republic::class);
+    }
+
     /*
      * METHODS
      */

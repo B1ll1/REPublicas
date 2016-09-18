@@ -15,7 +15,7 @@ class BillTypeController extends Controller
 
     public function __construct(RepublicRepository $republicRepository, BillTypeRepository $billTypeRepository)
     {
-        $this->repository = $billTypeRepository;
+        $this->repository         = $billTypeRepository;
         $this->republicRepository = $republicRepository;
     }
 
@@ -26,7 +26,7 @@ class BillTypeController extends Controller
      */
     public function index($republicId)
     {
-        $republic = $this->republicRepository->with('billtypes')->find($republicId);
+        $republic         = $this->republicRepository->with('billtypes')->find($republicId);
         $generalBilltypes = $this->repository->getGeneralTypes()->get();
 
         return view('billtypes.index', compact('republic', 'generalBilltypes'));

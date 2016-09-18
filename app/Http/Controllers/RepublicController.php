@@ -25,13 +25,10 @@ class RepublicController extends Controller
      */
     public function index()
     {
-        if(is_null(Auth::user()->republic) && Auth::user()->republics->isEmpty())
+        if(is_null(Auth::user()->republic))
             return redirect()->route('republic.create');
         else {
-            if(!is_null(Auth::user()->republic))
-                $republic = Auth::user()->republic;
-            else
-                $republic = Auth::user()->republics->first();
+            $republic = Auth::user()->republic;
 
             return redirect()->route('republic.dashboard', $republic->id);
         }
@@ -64,9 +61,9 @@ class RepublicController extends Controller
     {
         \DB::beginTransaction();
         $inputs = $request->all();
-        $inputs['user_id'] = Auth::user()->id;
 
         $republic = $this->repository->create($inputs);
+        $republic->users()->save(Auth::user());
 
         if($republic) {
             $totalRooms = intval($inputs['simple_rooms']) + intval($inputs['suite_rooms']);
