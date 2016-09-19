@@ -6,7 +6,13 @@
 
       @include('layouts.partials.statistcs')
 
-      <!-- row -->
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
+          <section id="monthlyChart" class="chart-area"></section>
+        </div>
+      </div>
+
+      {{-- <!-- row -->
       <div class="row">
         <div class="col-md-6">
           <!-- The time line -->
@@ -123,8 +129,97 @@
         </div>
         <!-- /.col -->
       </div>
-      <!-- /.row -->
+      <!-- /.row --> --}}
 
     </section>
     <!-- /.section -->
+@stop
+
+@section('specific_scripts')
+  <script src="/assets/libs/highcharts/highcharts.js"></script>
+  <script src="/assets/libs/highcharts/highcharts-more.js"></script>
+@stop
+
+@section('inline_scripts')
+<script>
+  $(document).ready(function() {
+    /* Translates highcharts to pt-br */
+    Highcharts.setOptions({
+        lang: {
+            loading: ['Atualizando o gráfico...aguarde'],
+            months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            shortMonths: ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            contextButtonTitle: 'Exportar gráfico',
+            decimalPoint: ',',
+            thousandsSep: '.',
+            downloadJPEG: 'Baixar imagem JPEG',
+            downloadPDF: 'Baixar arquivo PDF',
+            downloadPNG: 'Baixar imagem PNG',
+            downloadSVG: 'Baixar vetor SVG',
+            printChart: 'Imprimir gráfico',
+            rangeSelectorFrom: 'De',
+            rangeSelectorTo: 'Para',
+            rangeSelectorZoom: 'Zoom',
+            resetZoom: 'Limpar Zoom',
+            resetZoomTitle: 'Voltar Zoom para nível 1:1'
+        }
+    });
+
+    var arrayBills = {!! json_encode($arrayBillsPerTypeAndMonth) !!};
+    var arrayDates = {!! json_encode($arrayDates) !!};
+
+    $('#monthlyChart').highcharts({
+      chart: {
+          type: 'column',
+          zoomType: 'x',
+          height: 500,
+          spacingTop: 25,
+          spacingBottom: 25,
+      },
+      credits: {
+          enabled: false,
+      },
+      colors: ['#50B432', '#058DC7', '#ED561B', '#DDDF00', '#24CBE5', '#64E572',
+              '#FF9655', '#FFF263', '#6AF9C4'],
+      title: {
+          text: 'Histórico Mensal de Gastos (últimos 6 meses)'
+      },
+      xAxis: {
+          categories: arrayDates,
+      },
+      yAxis: {
+        min: 0,
+        title: {
+            text: 'Gastos Mensais'
+        },
+        // Mostra o valor total do stack
+        stackLabels: {
+          enabled: true,
+          style: {
+              fontWeight: 'bold',
+              color: '#000'
+          },
+          formatter: function() {
+            return 'R$ ' + this.total.toFixed(2).toString().replace('.', ',');
+          }
+        }
+      },
+      legend: {
+        reversed: true,
+      },
+      tooltip: {
+        pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>R$ {point.y:,.2f}</b><br>',
+        // shared: true
+      },
+      plotOptions: {
+        series: {
+            stacking: 'normal',
+            pointPadding: 0.1,
+        }
+      },
+      series: arrayBills
+    });
+  });
+</script>
 @stop

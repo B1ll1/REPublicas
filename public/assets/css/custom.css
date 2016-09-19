@@ -13,7 +13,7 @@
 
 .room a,
 .bill-box a {
-    color: #000;
+    color: #333;
 }
 
 /* BILL BOX */
@@ -65,7 +65,8 @@
 .bill-box-number {
   display: block;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 22px;
+  text-decoration: underline;
 }
 .progress-description,
 .bill-box-text {
@@ -108,4 +109,8 @@
   .breadcrumb {
     display: none !important;
   }
+}
+
+.chart-area {
+  margin: 3% 0;
 }

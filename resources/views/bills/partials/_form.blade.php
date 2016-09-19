@@ -10,11 +10,11 @@
           <select name="billtype_id" id="billSelectType" class="form-control">
             <option value=""></option>
             @foreach($generalBilltypes as $type)
-            <option value="{{$type->id}}">{{ $type->name }}</option>
+            <option value="{{$type->id}}" @if(strpos(Request::url(), 'editar')){{ ($type->id == $bill->id) ? 'selected' : '' }}@endif>{{ $type->name }}</option>
             @endforeach
 
             @foreach($republic->billtypes as $type)
-            <option value="{{$type->id}}">{{ $type->name }}</option>
+            <option value="{{$type->id}}" @if(strpos(Request::url(), 'editar')){{ ($type->id == $bill->id) ? 'selected' : '' }}@endif>{{ $type->name }}</option>
             @endforeach
           </select>
         </div>
@@ -31,7 +31,11 @@
 
         <div class="form-group">
           <label for="billDueDate">Data de Vencimento</label>
+          @if(strpos(Request::url(), 'editar'))
+          {!! Form::text('due_date', $bill->due_date->format('d/m/Y'), ['id' => 'billDueDate', 'class' => 'form-control']) !!}
+          @else
           {!! Form::text('due_date', null, ['id' => 'billDueDate', 'class' => 'form-control']) !!}
+          @endif
         </div>
 
         <div class="form-group">
@@ -39,7 +43,7 @@
           <select name="user_id" id="billSelectUser" class="form-control">
             <option value=""></option>
             @foreach($republic->users as $user)
-            <option value="{{$user->id}}">{{ $user->name }}</option>
+            <option value="{{$user->id}}" @if(strpos(Request::url(), 'editar')){{ ($user->id == $bill->responsible->id) ? 'selected' : '' }}@endif>{{ $user->name }}</option>
             @endforeach
           </select>
         </div>

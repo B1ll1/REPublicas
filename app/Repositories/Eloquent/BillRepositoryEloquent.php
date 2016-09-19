@@ -34,10 +34,20 @@ class BillRepositoryEloquent extends BaseRepository implements BillRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getByRepublicOrderedBy($republicId, $field = null)
+    public function getByRepublicOrderedByNotPaid($republicId, $field = null)
     {
         is_null($field) ? $field = 'id' : $field = $field;
 
-        return $this->model->where('republic_id', $republicId)->orderBy($field);
+        return $this->model->where('republic_id', $republicId)->where('is_paid', false)->orderBy($field);
+    }
+
+    public function getByTypePerMonth($republicId)
+    {
+        return $this->model->select([
+                'bills.name',
+                'bills.value',
+                'bills.due_date',
+                'bills.billtype_id',
+            ])->where('republic_id', $republicId);
     }
 }

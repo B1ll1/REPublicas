@@ -25,7 +25,7 @@
         @foreach($generalBilltypes as $key => $billtype)
         <div class="billtype-{{$billtype->id}} col-md-6 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-{{ $billtype->getColor() }}"><i class="fa fa-{{ $billtype->getIcon() }} fa-fw"></i></span>
+            <span class="info-box-icon bg-{{ $billtype->color }}"><i class="fa fa-{{ $billtype->icon }} fa-fw"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-number">{{ $billtype->name }}
@@ -46,7 +46,7 @@
         @foreach($republic->billtypes as $key => $billtype)
         <div id="billtype-{{$billtype->id}}" class="billtype col-md-6 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-{{ $billtype->getColor() }}"><i class="fa fa-{{ $billtype->getIcon() }} fa-fw"></i></span>
+            <span class="info-box-icon bg-{{ $billtype->color }}"><i class="fa fa-{{ $billtype->icon }} fa-fw"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-number">{{ $billtype->name }}

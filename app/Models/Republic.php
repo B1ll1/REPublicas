@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Republicas\Models\BillType;
 
 class Republic extends Model implements Transformable
 {
@@ -78,9 +79,11 @@ class Republic extends Model implements Transformable
         $total = 0.00;
 
         foreach ($this->bills as $key => $bill) {
-            $total += $bill->value;
+            // Se o mês da data de vencimento for igual mês atual, adiciona ao total
+            $bill->due_date->format('m/Y') == Carbon::now()->format('m/Y') ? $total += $bill->value : $total += 0;
         }
 
+        // Soma o aluguel
         $total += $this->getRentValue();
 
         return $total;
@@ -122,5 +125,32 @@ class Republic extends Model implements Transformable
             case 12:
                 return 'Dezembro';
         }
+    }
+
+    public function getArrayBillsGroupedByTypeAndMonth()
+    {
+        $array = [];
+        $arrayData = [];
+        $billtypes = BillType::where('republic_id', $this->id)->orWhere('republic_id', null)->get();
+
+        foreach ($billtypes as $key => $billtype) {
+            array_push($array, [
+                'name' => $billtype->name,
+                'data' => $billtype->getAllBills($this->id)
+            ]);
+        }
+
+        return $array;
+    }
+
+    public function getArrayBillDates()
+    {
+        $dates = [];
+
+        foreach ($this->bills->sortBy('due_date') as $key => $bill) {
+            array_push($dates, $bill->due_date->format('M/Y'));
+        }
+
+        return array_values(array_unique($dates));
     }
 }
