@@ -25,8 +25,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $redirectTo = '/dashboard';
-    protected $redirectPath = '/dashboard';
+    protected $redirectTo = '/republica';
+    protected $redirectPath = '/republica';
 
     /**
      * Create a new authentication controller instance.
@@ -65,10 +65,10 @@ class AuthController extends Controller
 
         $aux = User::firstOrCreate($data);
 
-        if($aux->photo == "") {
-            $aux->setDefaultPhoto();
-            $aux->save();
-        }
+        // if($aux->photo == "") {
+        //     $aux->setDefaultPhoto();
+        //     $aux->save();
+        // }
 
         Auth::login($aux);
 

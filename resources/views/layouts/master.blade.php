@@ -29,6 +29,11 @@
   <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+  <!-- Select2 -->
+  {{-- <link rel="stylesheet" href="/adminlte/plugins/select2/select2.min.css"> --}}
+  <link rel="stylesheet" href="/assets/libs/select2/dist/css/select2.min.css" />
+  <link rel="stylesheet" href="/assets/libs/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/assets/css/custom.css">
 
@@ -62,9 +67,9 @@
 
   </div>
   <!-- /.content-wrapper -->
-  @include('layouts.partials.footer')
+  {{-- @include('layouts.partials.footer') --}}
 
-  @include('layouts.partials.control-sidebar')
+  {{-- @include('layouts.partials.control-sidebar') --}}
 
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
@@ -104,15 +109,20 @@
 <script src="/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="/adminlte/plugins/fastclick/fastclick.js"></script>
+<!-- Select2 -->
+<script src="/assets/libs/select2/dist/js/select2.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/app.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+{{-- <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/adminlte/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/adminlte/dist/js/demo.js"></script>
+<script src="/adminlte/dist/js/demo.js"></script> --}}
 
 @section('specific_scripts')
+@show
+
+@section('inline_scripts')
 @show
 
 </body>

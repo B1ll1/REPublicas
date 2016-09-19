@@ -10,3 +10,102 @@
   white-space: nowrap;
   padding: 0;
 }
+
+.room a,
+.bill-box a {
+    color: #000;
+}
+
+/* BILL BOX */
+.bill-box {
+  display: block;
+  min-height: 120px;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-bottom: 15px;
+}
+.bill-box small {
+  font-size: 14px;
+}
+.bill-box .progress {
+  background: rgba(0, 0, 0, 0.2);
+  margin: 5px -10px 5px -10px;
+  height: 2px;
+}
+.bill-box .progress,
+.bill-box .progress .progress-bar {
+  border-radius: 0;
+}
+.bill-box .progress .progress-bar {
+  background: #fff;
+}
+.bill-box-icon {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+  display: block;
+  float: left;
+  height: 120px;
+  width: 60px;
+  text-align: center;
+  font-size: 45px;
+  line-height: 120px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.bill-box-icon > img {
+  max-width: 100%;
+}
+.bill-box-content {
+  padding: 5px 10px;
+  margin-left: 60px;
+}
+.bill-box-number {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+.progress-description,
+.bill-box-text {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bill-box-text {
+  text-transform: uppercase;
+}
+.bill-box-important {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+.bill-box-more {
+  display: block;
+}
+.bill-box-title {
+	display: block;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+.bill-box-label {
+	font-size: 0.6em;
+}
+.bill-box-img {
+  display: block;
+}
+.bill-box-img > img {
+  max-height: 30px;
+  max-width: 30px;
+}
+.progress-description {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .breadcrumb {
+    display: none !important;
+  }
+}
