@@ -56,15 +56,15 @@
           <input type="text" name="neighbourhood" class="form-control" id="republicNeighbourhood" placeholder="Bairro">
         </div>
         <div class="form-group">
-          <label for="republicCity">Cidade</label>
-          <input type="text" name="city" class="form-control" id="republicCity" placeholder="Cidade">
-        </div>
-        <div class="form-group">
           <label for="republicState">Estado</label>
           <select id="republicState" name="state" class="form-control">
-            <option value="0" disabled selected>Selecione um estado...</option>
-            <option value="SP">São Paulo</option>
-            <option value="MG">Minas Gerais</option>
+          <option></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="republicCity">Cidade</label>
+          <select id="republicCity" name="city" class="form-control">
+          <option></option>
           </select>
         </div>
       </div>
