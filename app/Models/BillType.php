@@ -18,12 +18,17 @@ class BillType extends Model implements Transformable
         'description',
     ];
 
+    protected $appends = [
+        'color',
+        'icon',
+    ];
+
     /*
      * RELATIONS
      */
     public function bills()
     {
-        return $this->hasMany(Bill::class);
+        return $this->hasMany(Bill::class, 'billtype_id');
     }
 
     public function republic()
@@ -39,7 +44,7 @@ class BillType extends Model implements Transformable
      * Get the billtype icon.
      * @return string
      */
-    public function getIcon()
+    public function getIconAttribute()
     {
         $type = $this->id;
 
@@ -69,7 +74,7 @@ class BillType extends Model implements Transformable
      * Get the billtype color.
      * @return string
      */
-    public function getColor()
+    public function getColorAttribute()
     {
         $type = $this->id;
 
@@ -93,5 +98,16 @@ class BillType extends Model implements Transformable
                 return 'default';
                 break;
         }
+    }
+
+    public function getAllBills($republic_id)
+    {
+        $data = [];
+
+        foreach ($this->bills->where('republic_id', $republic_id)->sortBy('due_date') as $key => $bill) {
+            array_push($data, (float) $bill->value);
+        }
+
+        return $data;
     }
 }

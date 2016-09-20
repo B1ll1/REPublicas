@@ -3,20 +3,27 @@
 namespace Republicas\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Republicas\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-use Republicas\Contracts\Repositories\RoomRepository;
+use Republicas\Contracts\Repositories\BillRepository;
 use Republicas\Contracts\Repositories\RepublicRepository;
+use Republicas\Contracts\Repositories\RoomRepository;
+use Republicas\Http\Requests;
 
 class RepublicController extends Controller
 {
     protected $repository;
     protected $roomRepository;
+    protected $billRepository;
 
-    public function __construct(RepublicRepository $republicRepository, RoomRepository $roomRepository)
+    public function __construct(
+        RepublicRepository $republicRepository,
+        RoomRepository $roomRepository,
+        BillRepository $billRepository
+    )
     {
         $this->repository = $republicRepository;
         $this->roomRepository = $roomRepository;
+        $this->billRepository = $billRepository;
     }
     /**
      * Display a listing of the resource.
@@ -37,8 +44,10 @@ class RepublicController extends Controller
     public function dashboard($republicId)
     {
         $republic = $this->repository->find($republicId);
-
-        return view('republics.dashboard', compact('republic'));
+        $arrayBillsPerTypeAndMonth = $republic->getArrayBillsGroupedByTypeAndMonth();
+        $arrayDates = $republic->getArrayBillDates();
+        // dd($arrayBillsPerTypeAndMonth);
+        return view('republics.dashboard', compact('republic', 'arrayBillsPerTypeAndMonth', 'arrayDates'));
     }
 
     /**

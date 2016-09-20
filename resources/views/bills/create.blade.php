@@ -38,6 +38,35 @@
         width: '100%',
         placeholder: 'Selecione um responsável para este gasto...'
       });
+
+      $('#billDueDate').datetimepicker({
+        format   : 'DD/MM/YYYY',
+        locale   : 'pt-br',
+        showClear: true,
+        tooltips: {
+            today       : 'Ir para o dia de hoje',
+            clear       : 'Limpar',
+            close       : 'Fechar',
+            selectMonth : 'Selecionar mês',
+            prevMonth   : 'Mês Anterior',
+            nextMonth   : 'Mês Posterior',
+            selectYear  : 'Selecionar ano',
+            prevYear    : 'Ano Anterior',
+            nextYear    : 'Ano Posterior',
+            selectDecade: 'Selecionar Década',
+            prevDecade  : 'Década Anterior',
+            nextDecade  : 'Década Posterior',
+            prevCentury : 'Século Anterior',
+            nextCentury : 'Século Posterior'
+        }
+      });
+
+      $('#billName').datetimepicker({
+        format   : 'MMMM',
+        locale   : 'pt-br',
+        showClear: true,
+        viewMode: 'months'
+      });
     });
 </script>
 @endsection

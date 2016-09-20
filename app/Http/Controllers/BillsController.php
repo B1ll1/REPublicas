@@ -37,7 +37,7 @@ class BillsController extends Controller
     public function index($republicId)
     {
         $republic = $this->republicRepository->find($republicId);
-        $bills    = $this->repository->getByRepublicOrderedBy($republicId, 'due_date')->paginate(5);
+        $bills    = $this->repository->with(['billtype', 'responsible'])->getByRepublicOrderedByNotPaid($republicId, 'due_date')->paginate(5);
 
         return view('bills.index', compact('republic', 'bills'));
     }

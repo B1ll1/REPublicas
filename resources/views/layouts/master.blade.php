@@ -24,7 +24,8 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
-  <link rel="stylesheet" href="/adminlte/plugins/datepicker/datepicker3.css">
+  {{-- <link rel="stylesheet" href="/adminlte/plugins/datepicker/datepicker3.css"> --}}
+  <link rel="stylesheet" href="/assets/libs/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
@@ -100,9 +101,11 @@
 <script src="/adminlte/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="/assets/libs/moment/locale/pt-br.js"></script>
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
+{{-- <script src="/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script> --}}
+<script src="/assets/libs/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
