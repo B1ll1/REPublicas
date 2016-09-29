@@ -17,11 +17,15 @@ Route::get('/', function() {
 
 Route::group(['middleware' => 'auth' ], function () {
 
+    Route::get('/republicas', ['as' => 'republics', 'uses' => 'RepublicController@republics']);
+    Route::get('/republicsdata',['as' => 'data_republics', 'uses'=>'RepublicController@republicsData']);
+
     Route::group(['prefix' => 'republica', 'as' => 'republic.'], function () {
         Route::get('/', ['as' => 'index', 'uses' => 'RepublicController@index']);
         Route::get('/nova', ['as' => 'create', 'uses' => 'RepublicController@create']);
         Route::post('/salvar', ['as' => 'store', 'uses' => 'RepublicController@store']);
     });
+
     Route::get('/{republicId}/dashboard', ['as' => 'republic.dashboard', 'uses' => 'RepublicController@dashboard']);
 
     /**

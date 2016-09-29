@@ -48,6 +48,17 @@
             <i class="fa fa-bar-chart fa-fw"></i> <span>Histórico de Gastos</span>
           </a>
         </li>
+        @else
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-home"></i> <span>Repúblicas</span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="{{ route('republics') }}"><i class="fa fa-eye"></i> Ver todas</a></li>
+            <li><a href="{{ route('republic.create') }}"><i class="fa fa-plus"></i> Cadastrar República</a></li>
+          </ul>
+        </li>
+
         @endif
       </ul>
 

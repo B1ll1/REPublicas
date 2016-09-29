@@ -8,6 +8,7 @@ use Republicas\Contracts\Repositories\BillRepository;
 use Republicas\Contracts\Repositories\RepublicRepository;
 use Republicas\Contracts\Repositories\RoomRepository;
 use Republicas\Http\Requests;
+use Yajra\Datatables\Facades\Datatables;
 
 class RepublicController extends Controller
 {
@@ -33,7 +34,7 @@ class RepublicController extends Controller
     public function index()
     {
         if(is_null(Auth::user()->republic))
-            return redirect()->route('republic.create');
+            return redirect()->route('republics');
         else {
             $republic = Auth::user()->republic;
 
@@ -140,5 +141,26 @@ class RepublicController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function republics()
+    {
+        $republics = $this->repository->all();
+
+        return view('republics.republics', compact('republics'));
+
+    }
+
+    /**
+     * Process datatables ajax request for services.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function republicsData()
+    {
+
+        $republics = $this->repository->all();
+        return Datatables::of($republics)->make(true);
+
     }
 }
